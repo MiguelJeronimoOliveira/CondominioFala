@@ -1,6 +1,10 @@
 package com.miguel.jeronimo.CondominioFala.Entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 public class Condominio {
@@ -15,4 +19,36 @@ public class Condominio {
     private String local;
 
     private int usersNumber;
+
+    public int getUsersNumber() {
+        return usersNumber;
+    }
+
+    public void setUsersNumber(int usersNumber) {
+        this.usersNumber = usersNumber;
+    }
+
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }
