@@ -1,16 +1,17 @@
 package com.miguel.jeronimo.CondominioFala.Entities;
 
 import com.miguel.jeronimo.CondominioFala.DTOS.PostRequest;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
+
+    @ManyToOne
+    @JoinColumn(name = "id_condominio")
+    private Condominio condominio;
 
     private String title;
 
@@ -24,7 +25,7 @@ public class Post {
 
     private int reports;
 
-    public Post passeDTO(PostRequest request) {
+    public Post postDTO(PostRequest request) {
             Post post = new Post();
             post.setText(request.text());
             post.setTitle(request.title());
@@ -85,5 +86,13 @@ public class Post {
 
     public void setReports(int reports) {
         this.reports = reports;
+    }
+
+    public Condominio getCondominio() {
+        return condominio;
+    }
+
+    public void setCondominio(Condominio condominio) {
+        this.condominio = condominio;
     }
 }

@@ -1,6 +1,9 @@
 package com.miguel.jeronimo.CondominioFala.Entities;
 
+import com.miguel.jeronimo.CondominioFala.DTOS.CondominioRequest;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Condominio {
@@ -9,12 +12,25 @@ public class Condominio {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @OneToMany(mappedBy = "condominio", cascade = CascadeType.ALL)
+    private List<Post> posts;
+
+    @OneToMany(mappedBy = "condominio", cascade = CascadeType.ALL)
+    private List<Users> residents;
+
     private String name;
 
     //unique
     private String local;
 
     private int usersNumber;
+
+    public Condominio condominioDTO(CondominioRequest request) {
+        Condominio condominio = new Condominio();
+        condominio.name = request.name();
+        condominio.local = request.local();
+        return condominio;
+    }
 
     public int getUsersNumber() {
         return usersNumber;
@@ -46,5 +62,21 @@ public class Condominio {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public List<Users> getResidents() {
+        return residents;
+    }
+
+    public void setResidents(List<Users> residents) {
+        this.residents = residents;
     }
 }
